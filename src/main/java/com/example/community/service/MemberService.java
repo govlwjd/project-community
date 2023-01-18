@@ -26,4 +26,20 @@ public class MemberService {
         memberRepository.save(member);
         return true;
     }
+
+    public MemberDto login(MemberDto memberDto) {
+        Optional<Member> optionalMember = memberRepository.findByEmail(memberDto.getEmail());
+        if (optionalMember.isPresent()) {
+            Member member = optionalMember.get();
+            if (member.getPassword().equals(memberDto.getPassword())) {
+                // 비밀번호 일치
+                return MemberDto.toMemberDto(member);
+            } else {
+                return null;
+            }
+        } else {
+            // 존재하지 않는 회원
+            return null;
+        }
+    }
 }
