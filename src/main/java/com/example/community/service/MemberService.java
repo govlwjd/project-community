@@ -1,6 +1,6 @@
 package com.example.community.service;
 
-import com.example.community.domain.Member;
+import com.example.community.domain.MemberEntity;
 import com.example.community.dto.MemberDto;
 import com.example.community.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,26 +14,27 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    public boolean register(MemberDto memberDto) {
+    // 회원가입
+    public boolean join(MemberDto memberDto) {
 
         // 이메일 중복 체크
-        Optional<Member> optionalMember = memberRepository.findByEmail(memberDto.getEmail());
+        Optional<MemberEntity> optionalMember = memberRepository.findByEmail(memberDto.getEmail());
         if (optionalMember.isPresent()) {
             return false;
         }
 
-        Member member = Member.toEntity(memberDto);
-        memberRepository.save(member);
+        memberRepository.save(MemberEntity.toEntity(memberDto));
         return true;
     }
 
+    // 로그인
     public MemberDto login(MemberDto memberDto) {
-        Optional<Member> optionalMember = memberRepository.findByEmail(memberDto.getEmail());
+        Optional<MemberEntity> optionalMember = memberRepository.findByEmail(memberDto.getEmail());
         if (optionalMember.isPresent()) {
-            Member member = optionalMember.get();
-            if (member.getPassword().equals(memberDto.getPassword())) {
+            MemberEntity memberEntity = optionalMember.get();
+            if (memberEntity.getPassword().equals(memberDto.getPassword())) {
                 // 비밀번호 일치
-                return MemberDto.toMemberDto(member);
+                return MemberDto.toDto(memberEntity);
             } else {
                 return null;
             }

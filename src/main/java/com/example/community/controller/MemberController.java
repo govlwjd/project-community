@@ -7,34 +7,36 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/member")
 public class MemberController {
 
     private final MemberService memberService;
 
     // 회원가입
-    @GetMapping("/member/join")
+    @GetMapping("/join")
     public String joinForm(@ModelAttribute("memberDto") MemberDto memberDto) {
         return "member/join";
     }
 
-    @PostMapping("/member/join")
+    @PostMapping("/join")
     public String join(@ModelAttribute MemberDto memberDto) {
-        memberService.register(memberDto);
+        memberService.join(memberDto);
         return "redirect:/";
     }
 
     // 로그인
-    @GetMapping("/member/login")
+    @GetMapping("/login")
     public String loginForm(@ModelAttribute("memberDto") MemberDto memberDto) {
         return "member/login";
     }
 
-    @PostMapping("/member/login")
+    @PostMapping("/login")
     public String login(@ModelAttribute MemberDto memberDto, HttpSession session) {
         MemberDto loginResult = memberService.login(memberDto);
         if (loginResult != null) {

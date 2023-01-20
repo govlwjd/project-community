@@ -1,6 +1,6 @@
 package com.example.community.dto;
 
-import com.example.community.domain.Member;
+import com.example.community.domain.MemberEntity;
 import lombok.*;
 
 @Getter
@@ -16,12 +16,12 @@ public class MemberDto {
     private String memberName;
     private String phone;
 
-    public static MemberDto toMemberDto(Member member) {
+    public static MemberDto toDto(MemberEntity memberEntity) {
         return MemberDto.builder()
-                .email(member.getEmail())
-                .password(member.getPassword())
-                .memberName(member.getMemberName())
-                .phone(member.getPhone())
+                .email(memberEntity.getEmail())
+                .password(memberEntity.getPassword())
+                .memberName(memberEntity.getMemberName())
+                .phone(memberEntity.getPhone())
                 .build();
     }
 }

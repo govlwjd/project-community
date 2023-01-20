@@ -6,13 +6,13 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
+@Entity(name = "MEMBER")
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Member {
+public class MemberEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment
     private Long id;
@@ -25,8 +25,8 @@ public class Member {
     private String phone;
     private LocalDateTime regDt;
 
-    public static Member toEntity(MemberDto memberDto) {
-        return Member.builder()
+    public static MemberEntity toEntity(MemberDto memberDto) {
+        return MemberEntity.builder()
                 .email(memberDto.getEmail())
                 .password(memberDto.getPassword())
                 .memberName(memberDto.getMemberName())
