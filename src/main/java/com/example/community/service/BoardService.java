@@ -6,6 +6,9 @@ import com.example.community.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class BoardService {
@@ -15,5 +18,13 @@ public class BoardService {
     // 게시글 저장
     public void save(BoardDto boardDto) {
         boardRepository.save(BoardEntity.toEntity(boardDto));
+    }
+
+    public List<BoardDto> findAll() {
+        List<BoardEntity> boardEntityList = boardRepository.findAll();
+        List<BoardDto> boardDtoList = boardEntityList.stream()
+                                        .map(e -> BoardDto.toDto(e))
+                                        .collect(Collectors.toList());
+        return boardDtoList;
     }
 }

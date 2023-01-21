@@ -17,7 +17,7 @@
         <h2>로그인</h2>
     </div>
     <h4 class="mb-3">회원 정보 입력</h4>
-    <form action="/memberEntity/login" th:object="${memberDto}" method="post">
+    <form action="/member/login" th:object="${memberDto}" method="post">
         <div>
             <label for="email">이메일</label>
             <input type="email" class="form-control" id="email" th:field="*{email}">
