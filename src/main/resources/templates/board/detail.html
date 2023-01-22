@@ -50,7 +50,7 @@
                 </div>
                 <div class="col">
                     <button type="button" class="w-100 btn btn-primary btn-lg"
-                            th:onclick="|location.href='@{/board/delete}'|">삭제</button>
+                            th:onclick="|location.href='@{/board/delete/{id}(id=${board.id})}'|">삭제</button>
                 </div>
             </div>
     </div>
