@@ -16,7 +16,7 @@
     <div class="py-5 text-center">
         <h2>회원 가입</h2>
     </div>
-    <h4 class="mb-3">회원 정보 입력</h4>
+    <h4 class="mb-3 text-center">회원 정보 입력</h4>
     <form action="/member/join" th:object="${memberDto}" method="post">
         <div>
             <label for="email">이메일</label>
@@ -32,7 +32,7 @@
         </div>
         <div>
             <label for="phone">전화번호</label>
-            <input type="text" class="form-control" id="phone" th:field="*{phone}">
+            <input type="tel" class="form-control" id="phone" th:field="*{phone}">
         </div>
         <hr class="my-4">
         <div class="row">
