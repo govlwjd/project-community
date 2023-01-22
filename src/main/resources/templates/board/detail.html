@@ -12,41 +12,45 @@
             <h2>게시판</h2>
         </div>
 
-        <table class="table table-hover text-center">
-            <tr>
-                <th>번호</th>
-                <td th:text="${board.id}"></td>
-            </tr>
-            <tr>
-                <th>제목</th>
-                <td th:text="${board.title}"></td>
-            </tr>
-            <tr>
-                <th>작성자</th>
-                <td th:text="${board.writer}"></td>
-            </tr>
-            <tr>
-                <th>날짜</th>
-                <td th:text="${board.regDt}"></td>
-            </tr>
-            <tr>
-                <th>조회수</th>
-                <td th:text="${board.hits}"></td>
-            </tr>
-            <tr>
-                <th>내용</th>
-                <td th:text="${board.content}"></td>
-            </tr>
+        <table class="table text-center">
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>날짜</th>
+                    <th>조회수</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td th:text="${board.id}"></td>
+                    <td th:text="${board.title}"></td>
+                    <td th:text="*{#temporals.format(board.regDt, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                    <td th:text="${board.hits}"></td>
+                </tr>
+                <tr>
+                    <th>작성자</th>
+                    <td colspan="3" th:text="${board.writer}"></td>
+                </tr>
+                <tr>
+                    <th>내용</th>
+                    <td colspan="3" th:text="${board.content}"></td>
+                </tr>
+            </tbody>
         </table>
 
             <div class="row">
                 <div class="col">
                     <button type="button" class="w-100 btn btn-primary btn-lg"
-                            th:onclick="|location.href='@{/board/save}'|">작성하기</button>
+                            th:onclick="|location.href='@{/board}'|">목록</button>
                 </div>
                 <div class="col">
                     <button type="button" class="w-100 btn btn-secondary btn-lg"
-                            th:onclick="|location.href='@{/}'|" >취소</button>
+                            th:onclick="|location.href='@{/board/edit/{id}(id=${board.id})}'|">수정</button>
+                </div>
+                <div class="col">
+                    <button type="button" class="w-100 btn btn-primary btn-lg"
+                            th:onclick="|location.href='@{/board/delete}'|">삭제</button>
                 </div>
             </div>
     </div>

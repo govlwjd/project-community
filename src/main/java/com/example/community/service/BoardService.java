@@ -17,8 +17,8 @@ public class BoardService {
 
     private final BoardRepository boardRepository;
 
-    // 게시글 저장
-    public void save(BoardDto boardDto) {
+    // 게시글 등록
+    public void register(BoardDto boardDto) {
         boardRepository.save(BoardEntity.toEntity(boardDto));
     }
 
@@ -44,5 +44,13 @@ public class BoardService {
         } else {
             return null;
         }
+    }
+
+    public BoardDto edit(BoardDto boardDto) {
+        BoardEntity boardEntity = BoardEntity.toEntity(boardDto);
+        boardEntity.setId(boardDto.getId());
+        boardEntity.setHits(boardDto.getHits());
+        boardRepository.save(boardEntity);
+        return findById(boardDto.getId());
     }
 }
